@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 
@@ -12,11 +13,14 @@ import { ReactComponent as Logo } from "assets/images/logo.svg";
 import { Search, SearchIconWrapper, StyledInputBase } from "./styles";
 import paths from "constants/paths";
 import tableStore from "stores/table";
+import { ColorModeContext } from "root/useApp";
+import themeColor from "constants/themeColor";
 
 const AppBar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { search, setSearch } = tableStore;
+  const colorMode = useContext(ColorModeContext);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -56,9 +60,19 @@ const AppBar = () => {
             </>
           )}
 
-          <IconButton size="large" aria-label="change theme" color="inherit">
-            <BrightnessLightIcon />
-            {/* <BrightnessDarkIcon /> */}
+          <IconButton
+            size="large"
+            aria-label="change theme"
+            color="inherit"
+            onClick={() => {
+              colorMode.toggleColorMode();
+            }}
+          >
+            {colorMode.mode === themeColor.DARK ? (
+              <BrightnessLightIcon />
+            ) : (
+              <BrightnessDarkIcon />
+            )}
           </IconButton>
         </Toolbar>
       </AppBarMUI>
