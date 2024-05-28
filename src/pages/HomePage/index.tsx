@@ -1,7 +1,11 @@
-import AppBar from "components/AppBar";
+import Table from "components/Table";
 
 const HomePage = () => {
-  return <>Home</>;
+  return (
+    <>
+      <Table />
+    </>
+  );
 };
 
 export default HomePage;
