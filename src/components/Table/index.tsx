@@ -11,14 +11,20 @@ import { TableDataType } from "./Table.types";
 import TableHead from "./TableHead";
 import TableRow from "./TableRow";
 import useTable from "./useTable";
+import TableNotFound from "./TableNotFound";
 
 const Table = () => {
-  const { state, loading, handleScroll, viewPortElement } = useTable();
+  const { state, loading, handleScroll, viewPortElement, searchData } =
+    useTable();
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <>
-      {loading ? (
-        <Loader />
+      {searchData?.length === 0 ? (
+        <TableNotFound>Сервер не найден</TableNotFound>
       ) : (
         <TableContainer
           component={Paper}

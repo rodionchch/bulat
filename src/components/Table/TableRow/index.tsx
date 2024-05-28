@@ -26,7 +26,7 @@ const TableRow = ({ row }: TableRowProps) => {
       <TableCell align={"center"} sx={TableCellStyle}>
         {row.registered?.slice(0, 10)}
       </TableCell>
-      <TableCell sx={{ ...TableCellStyle, maxWidth: 300 }}>
+      <TableCell sx={{ ...TableCellStyle, maxWidth: 200 }}>
         {row.description}
       </TableCell>
     </TableRowMUI>

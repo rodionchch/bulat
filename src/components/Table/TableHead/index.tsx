@@ -9,14 +9,14 @@ const TableHead = () => {
     <TableHeadMUI>
       <TableRowMUI>
         <TableCell>ID</TableCell>
-        <TableCell>Server Name</TableCell>
-        <TableCell>Company</TableCell>
+        <TableCell>Сервер</TableCell>
+        <TableCell>Компания</TableCell>
 
         <TableCell align={"center"} padding={"none"}>
-          Status
+          Статус
         </TableCell>
-        <TableCell align={"center"}>Date</TableCell>
-        <TableCell>Description</TableCell>
+        <TableCell align={"center"}>Дата</TableCell>
+        <TableCell>Описание</TableCell>
       </TableRowMUI>
     </TableHeadMUI>
   );
