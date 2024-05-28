@@ -1,4 +1,9 @@
 export type ServersResponse = {
-  _id: string;
+  id: string;
   index: number;
+  isActive: boolean;
+  serverName: string;
+  company: string;
+  registered: string;
+  description: string;
 };
