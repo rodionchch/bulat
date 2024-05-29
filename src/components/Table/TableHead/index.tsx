@@ -3,8 +3,8 @@ import {
   TableCell,
   TableRow as TableRowMUI,
   TableSortLabel,
-  Box,
 } from "@mui/material";
+
 import { headCells } from "./cells";
 import { Data } from "./TableHead.types";
 import { Sort } from "../Table.types";

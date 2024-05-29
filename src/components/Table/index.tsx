@@ -12,7 +12,6 @@ import TableHead from "./TableHead";
 import TableRow from "./TableRow";
 import useTable from "./useTable";
 import TableNotFound from "./TableNotFound";
-import EnhancedTable from "./Demo";
 
 const Table = () => {
   const {

@@ -1,7 +1,8 @@
 import { TableRow as TableRowMUI, TableCell, IconButton } from "@mui/material";
+import { Settings } from "@mui/icons-material";
+
 import { TableDataType } from "../Table.types";
 import { TableCellStyle } from "./styles";
-import { Settings } from "@mui/icons-material";
 
 type TableRowProps = {
   row: TableDataType;

@@ -1,11 +1,11 @@
 import { Close, Search as SearchIcon } from "@mui/icons-material";
+import { IconButton, InputAdornment } from "@mui/material";
 
 import {
   Search as SearchStyled,
   SearchIconWrapper,
   StyledInputBase,
 } from "./styles";
-import { IconButton, InputAdornment } from "@mui/material";
 
 type SearchType = {
   search: string;
