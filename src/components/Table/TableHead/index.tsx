@@ -2,21 +2,49 @@ import {
   TableHead as TableHeadMUI,
   TableCell,
   TableRow as TableRowMUI,
+  TableSortLabel,
+  Box,
 } from "@mui/material";
+import { headCells } from "./cells";
+import { Data } from "./TableHead.types";
+import { Sort } from "../Table.types";
 
-const TableHead = () => {
+type TableHeadProps = {
+  onRequestSort: (
+    event: React.MouseEvent<unknown>,
+    property: keyof Data
+  ) => void;
+
+  order: Sort;
+  orderBy: string;
+};
+
+const TableHead: React.FC<TableHeadProps> = ({
+  orderBy,
+  order,
+  onRequestSort,
+}) => {
+  const createSortHandler =
+    (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
+      onRequestSort(event, property);
+    };
+
   return (
     <TableHeadMUI>
       <TableRowMUI>
-        <TableCell>ID</TableCell>
-        <TableCell>Сервер</TableCell>
-        <TableCell>Компания</TableCell>
+        {headCells?.map((cell) => (
+          <TableCell key={cell.id} align={cell.align || "left"}>
+            <TableSortLabel
+              active={orderBy === cell.id}
+              direction={orderBy === cell.id ? order : "asc"}
+              onClick={createSortHandler(cell.id)}
+            >
+              {cell.label}
+            </TableSortLabel>
+          </TableCell>
+        ))}
 
-        <TableCell align={"center"} padding={"none"}>
-          Статус
-        </TableCell>
-        <TableCell align={"center"}>Дата</TableCell>
-        <TableCell>Описание</TableCell>
+        <TableCell />
       </TableRowMUI>
     </TableHeadMUI>
   );

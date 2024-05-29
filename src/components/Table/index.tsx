@@ -12,10 +12,19 @@ import TableHead from "./TableHead";
 import TableRow from "./TableRow";
 import useTable from "./useTable";
 import TableNotFound from "./TableNotFound";
+import EnhancedTable from "./Demo";
 
 const Table = () => {
-  const { state, loading, handleScroll, viewPortElement, searchData } =
-    useTable();
+  const {
+    state,
+    loading,
+    handleScroll,
+    viewPortElement,
+    searchData,
+    handleRequestSort,
+    orderBy,
+    order,
+  } = useTable();
 
   if (loading) {
     return <Loader />;
@@ -37,10 +46,14 @@ const Table = () => {
             aria-label="simple table"
             stickyHeader
           >
-            <TableHead />
+            <TableHead
+              onRequestSort={handleRequestSort}
+              orderBy={orderBy}
+              order={order}
+            />
             <TableBody>
               <div style={{ height: state.topPaddingHeight }}></div>
-              {state.rows.map((row: TableDataType) => (
+              {state.rows?.map((row: TableDataType) => (
                 <TableRow key={row.description} row={row} />
               ))}
               <div style={{ height: state.bottomPaddingHeight }}></div>

@@ -1,8 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
-import { getDataSlice, setInitialState } from "./helpers";
 import ServersService from "api/service/Servers";
-import { TableDataType } from "./Table.types";
+import {
+  getComparator,
+  getDataSlice,
+  setInitialState,
+  stableSort,
+} from "./helpers";
+import { Sort, TableDataType } from "./Table.types";
+import { Data } from "./TableHead/TableHead.types";
 import tableStore from "stores/table";
 import searchByName from "utils/searchByName";
 import useDebounce from "hooks/useDebounce";
@@ -21,6 +27,8 @@ const useTable = () => {
     bottomPaddingHeight: 0,
     rows: [] as TableDataType[],
   });
+  const [order, setOrder] = useState<Sort>("asc");
+  const [orderBy, setOrderBy] = useState<keyof Data>("index");
 
   const debouncedSearchTerm = useDebounce(search, 300);
 
@@ -78,12 +86,41 @@ const useTable = () => {
     }));
   };
 
+  const handleRequestSort = (
+    _: React.MouseEvent<unknown>,
+    property: keyof Data
+  ) => {
+    const isAsc = orderBy === property && order === "asc";
+    const sort = isAsc ? "desc" : "asc";
+    setOrder(sort);
+    setOrderBy(property);
+
+    searchData.current = null;
+    tableStore.clearSearch();
+
+    const sortedData: any[] = stableSort<Data>(
+      data.current,
+      getComparator(sort, property) as any
+    );
+
+    data.current = sortedData;
+
+    if (viewPortElement.current) {
+      viewPortElement.current.scrollTop = 0;
+    }
+
+    setState(setInitialState(sortedData));
+  };
+
   return {
     state,
     loading,
     handleScroll,
     viewPortElement,
     searchData: searchData?.current,
+    handleRequestSort,
+    orderBy,
+    order,
   };
 };
 

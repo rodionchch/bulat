@@ -1,6 +1,7 @@
-import { TableRow as TableRowMUI, TableCell } from "@mui/material";
+import { TableRow as TableRowMUI, TableCell, IconButton } from "@mui/material";
 import { TableDataType } from "../Table.types";
 import { TableCellStyle } from "./styles";
+import { Settings } from "@mui/icons-material";
 
 type TableRowProps = {
   row: TableDataType;
@@ -28,6 +29,11 @@ const TableRow = ({ row }: TableRowProps) => {
       </TableCell>
       <TableCell sx={{ ...TableCellStyle, maxWidth: 200 }}>
         {row.description}
+      </TableCell>
+      <TableCell padding="none">
+        <IconButton disabled size="small">
+          <Settings />
+        </IconButton>
       </TableCell>
     </TableRowMUI>
   );

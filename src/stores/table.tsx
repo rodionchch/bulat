@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 
 class TableStore {
-  search = "";
+  search: string = "";
 
   constructor() {
     makeAutoObservable(this);

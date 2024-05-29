@@ -6,20 +6,19 @@ import { AppBar as AppBarMUI, Box, Toolbar, IconButton } from "@mui/material";
 import {
   Brightness7 as BrightnessLightIcon,
   Brightness4 as BrightnessDarkIcon,
-  Search as SearchIcon,
 } from "@mui/icons-material";
 
 import { ReactComponent as Logo } from "assets/images/logo.svg";
-import { Search, SearchIconWrapper, StyledInputBase } from "./styles";
-import paths from "constants/paths";
-import tableStore from "stores/table";
 import { ColorModeContext } from "root/useApp";
 import themeColor from "constants/themeColor";
+import Search from "components/Search";
+import tableStore from "stores/table";
+import paths from "constants/paths";
 
 const AppBar = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { search, setSearch } = tableStore;
+  const { search, setSearch, clearSearch } = tableStore;
   const colorMode = useContext(ColorModeContext);
 
   return (
@@ -39,24 +38,16 @@ const AppBar = () => {
             <Logo />
           </Box>
 
-          <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ flexGrow: 5 }} />
 
           {pathname === paths.home && (
             <>
-              <Search>
-                <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
-                  value={search}
-                  placeholder="Поиск"
-                  inputProps={{ "aria-label": "search" }}
-                  onChange={(e) => {
-                    setSearch(e.target.value);
-                  }}
-                />
-              </Search>
-              <Box sx={{ flexGrow: 1 }} />
+              <Search
+                search={search}
+                setSearch={setSearch}
+                clearSearch={clearSearch}
+              />
+              <Box sx={{ flexGrow: 6 }} />
             </>
           )}
 
